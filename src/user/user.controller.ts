@@ -9,15 +9,20 @@ import {
   Delete,
   UseInterceptors,
   UploadedFiles,
+  Redirect,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import { TodoService } from 'src/todo/todo.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly todoService: TodoService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -41,7 +46,7 @@ export class UserController {
 
   @Get('find')
   find(@Query('name') name?: string) {
-    return `name: ${name}`;
+    return `name: ${name} ` + this.todoService.findAll();
   }
 
   @Get(':id')
