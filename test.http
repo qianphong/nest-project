@@ -1,7 +1,7 @@
 @BaseURL = http://127.0.0.1:3000
 
 
-### 主页
+### 使用 filter 过滤错误
 GET {{BaseURL}}
 
 ### 测试连接
@@ -9,31 +9,11 @@ GET {{BaseURL}}/test
     ?id=23423
 Token: 123456
 
-### 用户
-POST {{BaseURL}}/user
-Content-Type: application/json
-
-{
-    "name": "test",
-    "password": "123456"
-}
-
-### 获取一个用户
-GET {{BaseURL}}/user/1
-
-
-### 获取一个用户
-GET {{BaseURL}}/user/find
-    ?name=test
-
-### 获取消息
-GET {{BaseURL}}/notify
-
-### next
+### 参数类型验证
 GET {{BaseURL}}/ppp
     ?name=1
 
-### 发送短信
+### 发送短信（对象类型验证）
 POST {{BaseURL}}/sms
 Content-Type: application/json
 
@@ -42,11 +22,12 @@ Content-Type: application/json
     "code": "acbn"
 }
 
-### 上传文件
-POST {{BaseURL}}/upload
-Content-Type: multipart/form-data
+### 获取消息
+GET {{BaseURL}}/notify
 
-{
-    "file": "file",
-    "name": "test"
-}
+
+
+### 过去文件
+
+GET {{BaseURL}}/file/1689670686788-633262.png
+Custom: 123

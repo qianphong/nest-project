@@ -7,13 +7,12 @@ import {
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from '@/user/user.module';
-import { TodoModule } from '@/todo/todo.module';
 import { NotifyModule } from '@/notify/notify.module';
 import { AppMiddleware } from './app.middleware';
+import { FileModule } from '@/file/file.module';
 
 @Module({
-  imports: [UserModule, TodoModule, NotifyModule.register({ count: 23 })],
+  imports: [NotifyModule.register({ count: 23 }), FileModule],
   controllers: [AppController],
   providers: [
     AppService,

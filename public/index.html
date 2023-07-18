@@ -4,14 +4,17 @@
     <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
   </head>
   <body>
-    <input id="fileInput" type="file" multiple />
-    <script>
+    <form action="/file/upload" method="post" enctype="multipart/form-data">
+      <label for="name">姓名：</label>
+      <input type="text" name="name" required />
+      <input name="file" type="file" multiple />
+      <button type="submit">提交</button>
+    </form>
+    <!-- <script>
       const fileInput = document.querySelector('#fileInput');
 
       async function formData() {
         const data = new FormData();
-        data.set('name', '光');
-        data.set('age', 20);
         Array.from(fileInput.files).forEach((file, index) => {
           data.append('file', file);
         });
@@ -23,6 +26,6 @@
       }
 
       fileInput.onchange = formData;
-    </script>
+    </script> -->
   </body>
 </html>
