@@ -1,4 +1,5 @@
 import { Catch, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
+import { Response } from 'express';
 
 export class AppException extends Error {
   constructor(message?: string) {
@@ -8,13 +9,12 @@ export class AppException extends Error {
 }
 
 @Catch(AppException)
-export class AppFilter implements ExceptionFilter {
+export class AppFilter implements ExceptionFilter<AppException> {
   catch(exception: AppException, host: ArgumentsHost) {
     console.log('AppFilter: catch', exception.message);
     if (host.getType() === 'http') {
       const ctx = host.switchToHttp();
-      const request = ctx.getRequest();
-      const response = ctx.getResponse();
+      const response = ctx.getResponse<Response>();
 
       response.status(500).json({
         statusCode: 500,

@@ -1,0 +1,13 @@
+*.md
+!README.md
+node_modules/
+.git/
+.vscode/
+.dockerignore
+.eslintignore
+.eslintrc
+.prettierrc
+.prettierignore
+.test.http
+upload/
+.vscode/

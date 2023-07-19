@@ -20,6 +20,7 @@ import {
   Body,
   DefaultValuePipe,
   ValidationPipe,
+  Logger,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppGuard } from './app.guard';
@@ -37,24 +38,20 @@ enum TYPE_ENUM {
 @SetMetadata('roles', ['admin'])
 @UseInterceptors(AppInterceptor)
 export class AppController implements OnModuleInit, OnApplicationBootstrap {
-  constructor(
-    private readonly appService: AppService,
-    @Inject('person') private readonly person: string,
-    @Inject('test') private readonly test: { name: string; date: Date },
-  ) {}
-
+  constructor(private readonly appService: AppService) {}
+  private logger = new Logger();
   onModuleInit() {
-    console.log('AppController: onModuleInit');
+    this.logger.log('AppController: onModuleInit');
   }
   onApplicationBootstrap() {
-    console.log('AppController: onApplicationBootstrap');
+    this.logger.warn('AppController: onApplicationBootstrap');
   }
 
   @Get()
   @UseFilters(AppFilter)
   getHello() {
     throw new AppException('AppException: getHello');
-    return this.appService.getHello() + this.person + this.test.date;
+    return this.appService.getHello();
   }
 
   @Get('/test')
