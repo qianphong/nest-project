@@ -1,15 +1,40 @@
-import { IsNumber, IsOptional, IsInt, Min, Max } from 'class-validator';
+import { IsOptional, IsIn, IsNumberString } from 'class-validator';
 
+const MODE = ['cover', 'contain', 'fill', 'inside', 'outside'] as const;
 export class FileOptions {
-  @IsNumber()
+  /**
+   * 宽
+   */
+  @IsNumberString()
   @IsOptional()
-  w: number;
+  w?: string;
 
-  @IsNumber()
+  /**
+   * 高
+   */
+  @IsNumberString()
   @IsOptional()
-  h: number;
+  h?: string;
 
-  @IsNumber()
+  /**
+   * 图片裁切模式
+   */
+  @IsIn(MODE)
   @IsOptional()
-  level: number;
+  m?: (typeof MODE)[number];
+
+  /**
+   * 质量
+   */
+  @IsNumberString()
+  @IsOptional()
+  q?: string;
+
+  /**
+   * 缩放级别
+   */
+
+  @IsNumberString()
+  @IsOptional()
+  level?: string;
 }

@@ -1,4 +1,4 @@
-@BaseURL = http://127.0.0.1:3000
+@BaseURL = http://127.0.0.1:3001
 
 
 ### 使用 filter 过滤错误
@@ -25,9 +25,24 @@ Content-Type: application/json
 ### 获取消息
 GET {{BaseURL}}/notify
 
+### 上传文件
+POST {{BaseURL}}/file/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="测试.png"
+Content-Type: image/png
+
+< ./upload/1689670686788-633262.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
-### 过去文件
+### 获取文件
 
 GET {{BaseURL}}/file/1689670686788-633262.png
+    ?w=100&h=200&m=cover&q=1
 Custom: 123

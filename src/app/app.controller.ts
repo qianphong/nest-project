@@ -20,6 +20,7 @@ import {
   Body,
   DefaultValuePipe,
   ValidationPipe,
+  Logger,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppGuard } from './app.guard';
@@ -42,12 +43,12 @@ export class AppController implements OnModuleInit, OnApplicationBootstrap {
     @Inject('person') private readonly person: string,
     @Inject('test') private readonly test: { name: string; date: Date },
   ) {}
-
+  private logger = new Logger();
   onModuleInit() {
-    console.log('AppController: onModuleInit');
+    this.logger.log('AppController: onModuleInit');
   }
   onApplicationBootstrap() {
-    console.log('AppController: onApplicationBootstrap');
+    this.logger.warn('AppController: onApplicationBootstrap');
   }
 
   @Get()
