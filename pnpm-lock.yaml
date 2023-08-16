@@ -957,6 +957,7 @@ packages:
     transitivePeerDependencies:
       - encoding
 
+<<<<<<< HEAD
   /@nestjs/jwt@10.1.0(@nestjs/common@10.0.0):
     resolution: {integrity: sha512-iLwCGS25ybUxGS7i5j/Mwuyzvp/WxJftHlm8aLEBv5GV92apz6L1QVjxLdZrqXbzo++C8gdJauhzil8qitY+6w==}
     peerDependencies:
@@ -967,6 +968,8 @@ packages:
       jsonwebtoken: 9.0.0
     dev: false
 
+=======
+>>>>>>> 0374747ac71fb2002977d53c2b8db069218dfa03
   /@nestjs/mapped-types@0.0.1(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13):
     resolution: {integrity: sha512-4G4Ui7Sj0UqXiZsUFk/6cPD3K7uZEFSElzkOftaJ3/lXW+HUi1/vfWXabF53qrzO1enTRQDxt1plDbP6SsqXEg==}
     peerDependencies:
