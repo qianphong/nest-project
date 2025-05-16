@@ -1,10 +1,10 @@
 import { Controller, Get, Inject, Session } from '@nestjs/common';
-import { MODULE_OPTIONS_TOKEN } from './notify.module-definition';
+import { MODULE_OPTIONS_TOKEN, OPTIONS_TYPE } from './notify.module-definition';
 
 @Controller('notify')
 export class NotifyController {
   constructor(
-    @Inject(MODULE_OPTIONS_TOKEN) private options: Record<string, any>,
+    @Inject(MODULE_OPTIONS_TOKEN) private options: typeof OPTIONS_TYPE,
   ) {}
 
   @Get()

@@ -1,9 +1,15 @@
-import { Catch, ExceptionFilter, ArgumentsHost } from '@nestjs/common';
+import {
+  Catch,
+  ExceptionFilter,
+  ArgumentsHost,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { Response } from 'express';
 
-export class AppException extends Error {
+export class AppException extends HttpException {
   constructor(message?: string) {
-    super(message);
+    super(message, HttpStatus.BAD_REQUEST);
     console.log('AppException: constructor');
   }
 }
@@ -11,16 +17,13 @@ export class AppException extends Error {
 @Catch(AppException)
 export class AppFilter implements ExceptionFilter<AppException> {
   catch(exception: AppException, host: ArgumentsHost) {
-    console.log('AppFilter: catch', exception.message);
-    if (host.getType() === 'http') {
-      const ctx = host.switchToHttp();
-      const response = ctx.getResponse<Response>();
-
-      response.status(500).json({
-        statusCode: 500,
-        timestamp: new Date().toISOString(),
-        message: exception.message,
-      });
-    }
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const statusCode = exception.getStatus();
+    response.status(statusCode).json({
+      statusCode,
+      timestamp: new Date().toISOString(),
+      message: exception.message,
+    });
   }
 }
